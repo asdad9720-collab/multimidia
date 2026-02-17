@@ -53,13 +53,51 @@
 		<a href="#" style="width: 50%;" id="umdoistrestplink1">
 			<img src="1656181621shopee-logo-white.webp" alt="Logo">
 		</a>
-		<div class="container_banner">
-			<span>1500 CUPONS DISPONÍVEIS</span>
-			<div class="name_cupom">
-				<h3 class="animated-heading">DAY WEEK</h3>
-				<h5><span style="font-weight: bold;">|</span> 50% OFF</h5>
+		<div class="container_banner" style="flex-direction: row; justify-content: center; padding: 6px 12px; gap: 10px;">
+			<span style="font-size: 11px; font-weight: 700; letter-spacing: 0.5px; margin: 0;">OFERTA TERMINA EM:</span>
+			
+			<div class="timer-box" style="display: flex; gap: 4px; align-items: center;">
+				<div id="top-hours" style="background: white; color: #f53f2d; padding: 2px 5px; border-radius: 3px; font-weight: 800; font-size: 14px; min-width: 20px; text-align: center;">00</div>
+				<div style="color: white; font-weight: bold; font-size: 14px; margin-top: -2px;">:</div>
+				<div id="top-minutes" style="background: white; color: #f53f2d; padding: 2px 5px; border-radius: 3px; font-weight: 800; font-size: 14px; min-width: 20px; text-align: center;">14</div>
+				<div style="color: white; font-weight: bold; font-size: 14px; margin-top: -2px;">:</div>
+				<div id="top-seconds" style="background: white; color: #f53f2d; padding: 2px 5px; border-radius: 3px; font-weight: 800; font-size: 14px; min-width: 20px; text-align: center;">59</div>
 			</div>
 		</div>
+
+		<script>
+		  document.addEventListener("DOMContentLoaded", function() {
+			  let timeInSecs;
+			  let ticker;
+			  
+			  function startTimer(secs) {
+				  timeInSecs = parseInt(secs);
+				  ticker = setInterval("tick()", 1000);
+			  }
+			  
+			  window.tick = function() {
+				  let secs = timeInSecs;
+				  if (secs > 0) { timeInSecs--; } else { clearInterval(ticker); timeInSecs = 0; }
+				  
+				  let h = Math.floor(secs / 3600);
+				  let m = Math.floor((secs % 3600) / 60);
+				  let s = secs % 60;
+				  
+				  document.getElementById("top-hours").innerText = (h < 10 ? "0" : "") + h;
+				  document.getElementById("top-minutes").innerText = (m < 10 ? "0" : "") + m;
+				  document.getElementById("top-seconds").innerText = (s < 10 ? "0" : "") + s;
+				  
+				  sessionStorage.setItem("topTimerLP_Shopee", timeInSecs);
+			  }
+			  
+			  let savedTime = sessionStorage.getItem("topTimerLP_Shopee");
+			  if(savedTime && savedTime > 0) {
+				  startTimer(savedTime);
+			  } else {
+				  startTimer(15 * 60); // Inicia com 15 minutos
+			  }
+		  });
+		</script>
 	</div>
 
 	<style>
@@ -880,23 +918,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						data-id="1b9aafc8" data-element_type="widget" data-widget_type="text-editor.default">
 						<div class="elementor-widget-container">
 							<p>TERMINA EM:</p>
-						</div>
-					</div>
-				</div>
-				<div class="elementor-element elementor-element-746b5b8c e-con-full e-flex e-con e-child"
-					data-id="746b5b8c" data-element_type="container">
-					<div class="elementor-element elementor-element-5ce397d7 elementor-countdown--label-block elementor-widget elementor-widget-countdown"
-						data-id="5ce397d7" data-element_type="widget" data-widget_type="countdown.default">
-						<div class="elementor-widget-container">
-							<div data-evergreen-interval="600" class="elementor-countdown-wrapper" data-date="">
-								<div class="elementor-countdown-item"><span
-										class="elementor-countdown-digits elementor-countdown-hours"></span></div>
-								<div class="elementor-countdown-item"><span
-										class="elementor-countdown-digits elementor-countdown-minutes"></span></div>
-								<div class="elementor-countdown-item"><span
-										class="elementor-countdown-digits elementor-countdown-seconds"></span></div>
-							</div>
-						</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="elementor-element elementor-element-746b5b8c e-con-full e-flex e-con e-child" data-id="746b5b8c" data-element_type="container">
+                    <div class="elementor-element elementor-element-5ce397d7 elementor-countdown--label-block elementor-widget elementor-widget-countdown" data-id="5ce397d7" data-element_type="widget" data-widget_type="countdown.default">
+                        <div class="elementor-widget-container">
+                            <div data-evergreen-interval="600" class="elementor-countdown-wrapper" data-date="">
+                                <div class="elementor-countdown-item"><span id="hora-15m" class="elementor-countdown-digits elementor-countdown-hours">00</span></div>
+                                <div class="elementor-countdown-item"><span id="minuto-15m" class="elementor-countdown-digits elementor-countdown-minutes">15</span></div>
+                                <div class="elementor-countdown-item"><span id="segundo-15m" class="elementor-countdown-digits elementor-countdown-seconds">00</span></div>
+                            </div>
+                            
+                            <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                let timeInSecs;
+                                let ticker;
+                                
+                                function startTimer(secs) {
+                                    timeInSecs = parseInt(secs);
+                                    ticker = setInterval(tick, 1000);
+                                }
+                                
+                                function tick() {
+                                    let secs = timeInSecs;
+                                    if (secs > 0) { timeInSecs--; } else { clearInterval(ticker); timeInSecs = 0; }
+                                    
+                                    let h = Math.floor(secs / 3600);
+                                    let m = Math.floor((secs % 3600) / 60);
+                                    let s = secs % 60;
+                                    
+                                    document.getElementById("hora-15m").innerText = (h < 10 ? "0" : "") + h;
+                                    document.getElementById("minuto-15m").innerText = (m < 10 ? "0" : "") + m;
+                                    document.getElementById("segundo-15m").innerText = (s < 10 ? "0" : "") + s;
+                                    
+                                    sessionStorage.setItem("timer_15_minutos", timeInSecs);
+                                }
+                                
+                                let savedTime = sessionStorage.getItem("timer_15_minutos");
+                                if(savedTime && savedTime > 0) {
+                                    startTimer(savedTime);
+                                } else {
+                                    startTimer(15 * 60); // 15 minutos em segundos
+                                }
+                            });
+                            </script>
 					</div>
 				</div>
 			</div>
